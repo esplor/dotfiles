@@ -1,7 +1,7 @@
 ## Prereq
 ```
 apt-get update
-apt-get install stow
+apt-get install stow curl
 ```
 
 ## Cloning
