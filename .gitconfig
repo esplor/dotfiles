@@ -2,5 +2,4 @@
 	email = 3808473+esplor@users.noreply.github.com
 	name = Espen Lorentzen
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
