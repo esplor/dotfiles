@@ -1,7 +1,6 @@
 ## Prereq
 ```bash
-apt-get update
-apt-get install stow curl git
+sudo apt-get update && sudo apt-get install stow curl git
 ```
 
 ## Cloning
@@ -13,7 +12,7 @@ stow .
 
 ### Software
 
-## Oh my zsh
+### Oh my zsh
 ```bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
