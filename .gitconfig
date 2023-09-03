@@ -6,4 +6,4 @@
 [pull]
 	ff = yes
 [init]
-	defaultBranch = main
+	defaultbranch = main
