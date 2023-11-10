@@ -7,3 +7,5 @@
 	ff = yes
 [init]
 	defaultbranch = main
+[safe]
+	directory = *
