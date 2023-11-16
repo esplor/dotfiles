@@ -1,4 +1,5 @@
-## FROM https://www.reddit.com/r/swaywm/comments/uf5fv8/gtk_themes_not_working_debian_bullseye/
+## FROM reddit
+https://www.reddit.com/r/swaywm/comments/uf5fv8/gtk_themes_not_working_debian_bullseye/
 
 EDIT: I FOUND A SOLUTION, FINALLY!
 
@@ -27,3 +28,16 @@ exec_always {
 This even works when using sudo -E gparted
 
 Can someone please tell the fucking GTK/Gnome developers to fix their fucking shit code and allow double quotes to be used? For the love of fucking God... Ugh...
+
+
+```
+mkdir -p ~/.config/gtk-3.0/              
+cat <<EOF> ~/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-theme-name = Adwaita
+gtk-application-prefer-dark-theme = true
+gtk-icon-theme-name = Adwaita
+gtk-recent-files-max-age = 0
+gtk-recent-files-limit = 0
+EOF
+```
