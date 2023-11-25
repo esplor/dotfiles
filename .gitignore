@@ -2,3 +2,4 @@
 .config/nvim/lazy-lock.json
 .config/nvim/lazy-lock.json
 .config/pulse
+.config/gh/hosts.yml
