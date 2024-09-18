@@ -7,16 +7,19 @@ Okay, so this problem was fucking killing me all day, seriously. I went back to 
 
 Here's solutions that are both working for i3 and sway:
 
-# For the file ~/.config/gtk-3.0/settings.ini
+### For the file ~/.config/gtk-3.0/settings.ini
+```
 [Settings]
 gtk-theme-name = Adwaita
 gtk-application-prefer-dark-theme = true
 gtk-icon-theme-name = Adwaita
 gtk-recent-files-max-age = 0
 gtk-recent-files-limit = 0
+```
 And for your auto-execute line in ~/.config/sway/config
 
-# Sway autoexec
+### Sway autoexec
+```
 set $schema "org.gnome.desktop.interface"
 
 exec_always {
@@ -25,10 +28,10 @@ exec_always {
     gsettings set $schema cursor-theme Yaru
     gsettings set $schema gtk-application-prefer-dark-theme true
 }
+```
 This even works when using sudo -E gparted
 
 Can someone please tell the fucking GTK/Gnome developers to fix their fucking shit code and allow double quotes to be used? For the love of fucking God... Ugh...
-
 
 ```
 mkdir -p ~/.config/gtk-3.0/              
