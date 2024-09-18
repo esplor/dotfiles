@@ -12,10 +12,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  "folke/which-key.nvim",
+  { "folke/which-key.nvim" },
   { "folke/neoconf.nvim", cmd = "Neoconf" },
-  "folke/neodev.nvim",
-  { 'nvim-telescope/telescope.nvim' , branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' }},
+  { "folke/neodev.nvim"},
+  { "nvim-telescope/telescope.nvim" , 
+    branch = '0.1.x', 
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
   { "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function () 
@@ -60,7 +63,6 @@ require("lazy").setup({
       },
     },
   },
-  -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
   {
     'numToStr/Comment.nvim',
     opts = {
