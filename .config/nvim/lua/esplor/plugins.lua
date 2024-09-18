@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -9,26 +10,29 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "folke/which-key.nvim" },
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
-  { "folke/neodev.nvim"},
-  { "nvim-telescope/telescope.nvim" , 
-    branch = '0.1.x', 
+  { 'folke/which-key.nvim' },
+  { 'folke/neoconf.nvim', cmd = 'Neoconf' },
+  { 'folke/neodev.nvim'},
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  { "nvim-treesitter/nvim-treesitter",
+  {
+    'nvim-treesitter/nvim-treesitter',
     build = ":TSUpdate",
-    config = function () 
+    config = function ()
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
           ensure_installed = { "lua", "vim", "python",},
           sync_install = false,
           highlight = { enable = true },
-          indent = { enable = true },  
+          indent = { enable = true },
         })
     end,
   },
@@ -42,7 +46,7 @@ require("lazy").setup({
   },
    -- Markdown preview without yarn or npm
   {
-    "iamcco/markdown-preview.nvim",
+    'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
     build = function()
@@ -53,6 +57,10 @@ require("lazy").setup({
  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'echasnovski/mini.icons' 
+    },
     -- See `:help lualine.txt`
     opts = {
       options = {
