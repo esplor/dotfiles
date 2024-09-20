@@ -2,7 +2,7 @@
 
 LOCAL_DIR=/usr/local
 
-. ./functions.sh
+. ./functions
 
 if [ ! -d $LOCAL_DIR ]; then
     echo "Directory $LOCAL_DIR does not exist, creating.."
