@@ -9,7 +9,7 @@ if [ ! -d $LOCAL_DIR ]; then
     mkdir -p $LOCAL_DIR
 fi
 
-wget -qO- https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | sudo tar xz -C $LOCAL_DIR --strip-components=1
+_get_stdout https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | sudo tar xz -C $LOCAL_DIR --strip-components=1
 
 _print_dots
 echo Latest nvim downloaded and extracted to: $LOCAL_DIR/bin
