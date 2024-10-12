@@ -16,8 +16,8 @@ set $right l
 
 # Your preferred terminal emulator
 
-set $term kitty
-set $browser google-chrome-stable
+set $term foot
+set $browser firefox
 
 
 # Your preferred application launcher
@@ -92,6 +92,7 @@ input "type:keyboard" {
     # Start a terminal
     bindsym $mod+Return exec $term
     bindsym $mod+Shift+b exec $browser
+    bindsym $mod+Space exec wofi --show=drun
 
     # Kill focused window
     bindsym $mod+Shift+p kill
@@ -107,10 +108,15 @@ input "type:keyboard" {
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Ctrl+q exec swaymsg exit
+    bindsym Ctrl+$mod+Left workspace prev
+    bindsym Ctrl+$mod+Right workspace next
+    bindsym Ctrl+Alt+Left workspace prev
+    bindsym Ctrl+Alt+Right workspace next
 #
 # Moving around:
 #
@@ -119,6 +125,7 @@ input "type:keyboard" {
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
+
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -130,6 +137,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
+    
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -149,6 +157,7 @@ input "type:keyboard" {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -183,7 +192,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    # bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -224,13 +233,5 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    swaybar_command waybar
-}
-
 include /etc/sway/config.d/*
+include $HOME/.config/sway/config.d/*.conf
