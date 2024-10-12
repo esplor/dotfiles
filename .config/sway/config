@@ -4,6 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+include /etc/sway/config.d/*
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -19,15 +21,17 @@ set $right l
 set $term foot
 set $browser firefox
 
-
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
-include /etc/sway/config.d/*
 
 exec swaymsg "workspace 1; exec foot;"
 exec waybar
+
+# Hide title bar, waybar shows the title
+default_border pixel 2
+
 # Sway autoexec
 #set $schema "org.gnome.desktop.interface"
 #
@@ -43,7 +47,7 @@ exec waybar
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
 output eDP-2 resolution 2560x1600 scale 1
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /usr/share/backgrounds/gnome/drool-d.svg fill
 
 #
 # Example configuration:
@@ -118,7 +122,7 @@ input "type:keyboard" {
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
     bindsym $mod+Ctrl+q exec swaymsg exit
-    bindsym $mod+Shift+Backspace exec swaymsg exit
+    bindsym Ctrl+Alt+Backspace exec swaymsg exit
     bindsym Ctrl+$mod+Left workspace prev
     bindsym Ctrl+$mod+Right workspace next
     bindsym Ctrl+Alt+Left workspace prev
