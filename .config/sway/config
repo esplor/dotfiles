@@ -46,8 +46,12 @@ default_border pixel 2
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
-output eDP-2 resolution 2560x1600 scale 1
-output * bg /usr/share/backgrounds/gnome/drool-d.svg fill
+# --- Lenovo Thinkbook 16 ---
+#output eDP-2 resolution 2560x1600 scale 1
+# --- Lenovo E14
+output eDP-1 resolution 1920x1080 scale 1
+
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 #
 # Example configuration:
@@ -80,6 +84,12 @@ input "1739:52804:SYNA2BA6:00_06CB:CE44_Touchpad" {
 	middle_emulation enabled
 }
 
+input "2:14:ETPS/2_Elantech_Touchpad" {
+       	dwt enabled
+       	tap enabled
+       	natural_scroll enabled
+	middle_emulation enabled
+}
 # or input <identifier>
 input "type:keyboard" {
     xkb_layout no
