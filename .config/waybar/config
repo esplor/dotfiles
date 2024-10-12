@@ -2,24 +2,28 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["battery", "clock", "pulseaudio"],
+    "modules-right": ["battery", "clock","pulseaudio"],
     "sway/window": {
         "max-length": 50
     },
+    "backlight": {
+    	"format": "B:{} ",
+    	"device": "amdgpu_bl0",
+    	"scroll-step": 10.0
+    },
     "battery": {
-        "format": "{capacity}% {icon}",
+        "format": "B:{capacity}% ",
         "format-icons": ["", "", "", "", ""]
     },
     "clock": {
-        "format-alt": "{:%a, %d. %b  %H:%M}"
+    	"format": "T:{:%H:%M} ",
+        "format-alt": "{:%a, %d. %b  %H:%M} "
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
+        "format": "A:{volume}% {icon} ",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "",
         "format-icons": {
-            "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
-            "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
             "headphone": "",
             "hands-free": "",
             "headset": "",
