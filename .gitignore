@@ -5,3 +5,5 @@
 .config/gh/hosts.yml
 .vim/.netrwhist
 .vim/bundle/*
+.vim/autoload/plug.vim
+.vim/plugged/gruvbox
