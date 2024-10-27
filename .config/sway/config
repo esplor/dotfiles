@@ -33,14 +33,14 @@ exec waybar
 default_border pixel 2
 
 # Sway autoexec
-#set $schema "org.gnome.desktop.interface"
+set $schema "org.gnome.desktop.interface"
 #
-# exec_always {
-#    gsettings set $schema gtk-theme Adwaita
-#    gsettings set $schema icon-theme Adwaita
-#    gsettings set $schema cursor-theme Yaru
-#    gsettings set $schema gtk-application-prefer-dark-theme true
-#}
+exec_always {
+    gsettings set $schema gtk-theme Adwaita-dark
+    gsettings set $schema icon-theme Adwaita-dark
+    gsettings set $schema cursor-theme Yaru
+    gsettings set $schema gtk-application-prefer-dark-theme true
+}
 
 ### Output configuration
 #
@@ -49,8 +49,8 @@ default_border pixel 2
 # --- Lenovo Thinkbook 16 ---
 #output eDP-2 resolution 2560x1600 scale 1
 # --- Lenovo E14
-output eDP-1 resolution 1920x1080 scale 1
 
+output eDP-1 resolution 1920x1080 scale 1
 output * bg ~/.local/share/backgrounds/minas.jpg fill
 
 #
@@ -121,7 +121,7 @@ for_window {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
-    bindsym $mod+Shift+b exec $browser
+    bindsym $mod+Shift+i exec $browser
     bindsym $mod+Space exec wofi --show=drun
 
     # Kill focused window
