@@ -30,8 +30,9 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod         = "mod1"
-terminal    = guess_terminal()
+terminal    = "st" #guess_terminal()
 browser     = "firefox-esr"
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -76,7 +77,7 @@ keys = [
     ),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "Backspace", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
 ]
@@ -138,8 +139,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
+    font="Fira Code Retina",
+    fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -162,7 +163,7 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 # widget.Systray(),
-                widget.Clock(format="%d.%m.%Y %a %I:%M %p"),
+                widget.Clock(format="W:%U %a %d.%m.%Y %H:%M"),
                 widget.QuickExit(),
             ],
             24,

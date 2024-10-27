@@ -1,4 +1,4 @@
-_print_dots () {
+_dots () {
   printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 }
 

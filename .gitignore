@@ -7,3 +7,9 @@
 .vim/bundle/*
 .vim/autoload/plug.vim
 .vim/plugged/gruvbox
+.config/pavucontrol.ini
+.config/dconf/
+.config/Thunar/
+.config/xfce4/
+.config/user-dirs.dirs
+.config/user-dirs.locale
