@@ -7,3 +7,7 @@
 .vim/bundle/*
 .config/pavucontrol.ini
 .config/dconf/
+.config/Thunar/
+.config/xfce4/
+.config/user-dirs.dirs
+.config/user-dirs.locale
