@@ -7,9 +7,10 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" "Call" .vim/plugins .vim/sets.vim
 runtime plugins.vim
 runtime sets.vim
 
 " Theme related
 set background=dark
-autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme gruvbox

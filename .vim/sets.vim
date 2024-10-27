@@ -3,6 +3,7 @@ set relativenumber
 set cursorline
 
 filetype on
+
 " Set shift width to 4 spaces.
 set shiftwidth=4
 
@@ -44,4 +45,6 @@ set showmatch
 set hlsearch
 
 " Set the commands to save in history default number is 20.
-set history=1000
+" set history=1000
+
+set encoding=utf-8
