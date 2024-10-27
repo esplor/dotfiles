@@ -5,3 +5,5 @@
 .config/gh/hosts.yml
 .vim/.netrwhist
 .vim/bundle/*
+.config/pavucontrol.ini
+.config/dconf/
