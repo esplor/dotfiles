@@ -14,3 +14,6 @@ runtime sets.vim
 " Theme related
 set background=dark
 colorscheme gruvbox
+
+let g:airline_left_sep='>'
+let g:airline_right_sep='<'
