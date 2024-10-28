@@ -4,12 +4,12 @@ _dots () {
 
 _get_stdout () {
     URL=$1
-
     if [ -x "$(which wget)" ] ; then
         curl -o- -sfL $URL
     elif [ -x "$(which curl)" ]; then
         wget -q $URL -O-
     else
         echo "Could not find curl or wget, please install one." >&2
+        exit 1
     fi
 }
