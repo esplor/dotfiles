@@ -17,3 +17,6 @@ colorscheme gruvbox
 
 let g:airline_left_sep='>'
 let g:airline_right_sep='<'
+
+" No background, opacity works
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE 
