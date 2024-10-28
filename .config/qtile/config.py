@@ -62,13 +62,9 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+    Key([mod, "shift"], "Return",   lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
     Key([mod], "Return",            lazy.spawn(terminal), desc="Launch terminal"),
+    
     # Toggle between different layouts as defined below
     Key([mod], "Tab",               lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "Backspace",         lazy.window.kill(), desc="Kill focused window"),
@@ -142,9 +138,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="Fira Code Retina",
+    font="FiraCode Nerd Font",
     fontsize=14,
-    padding=3,
+    padding=2,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -167,10 +163,9 @@ screens = [
                 # widget.StatusNotifier(),
                 # widget.Systray(),
                 widget.Clock(format="W:%U %a %d.%m.%Y %H:%M"),
-                widget.QuickExit(),
             ],
             24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            border_width=[1, 0, 1, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
