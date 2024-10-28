@@ -12,3 +12,4 @@
 .vim/plugged/
 .vim/.netrwhist
 .vim/autoload/plug.vim
+__pycache__
