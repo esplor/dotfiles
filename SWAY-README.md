@@ -1,4 +1,6 @@
-## FROM reddit
+## Random notes when trying gnome -> swaywm
+
+### FROM reddit
 https://www.reddit.com/r/swaywm/comments/uf5fv8/gtk_themes_not_working_debian_bullseye/
 
 EDIT: I FOUND A SOLUTION, FINALLY!
