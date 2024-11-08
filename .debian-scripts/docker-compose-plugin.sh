@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
+# Clean this..
 
-# All users (Debian):
 DC_PATH="/usr/local/bin"
-#DC_PATH="$HOME/docker-bin/"
-# Current user
+
 # DC_PATH="$HOME/.docker/cli-plugins"
 
 if [ ! -d $DC_PATH ]; then

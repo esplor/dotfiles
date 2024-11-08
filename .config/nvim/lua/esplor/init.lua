@@ -5,3 +5,5 @@ require("esplor.remap")
 local opt = vim.opt
 
 opt.number = true
+opt.relativenumber = true
+--let g:loaded_perl_provider = 0
