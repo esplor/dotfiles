@@ -1,0 +1,3 @@
+- https://github.com/hendrikmi/neovim-kickstart-config
+- https://www.youtube.com/@henrymisc/videos
+- https://www.youtube.com/watch?v=KYDG3AHgYEs
