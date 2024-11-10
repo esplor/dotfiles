@@ -4,6 +4,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- TODO: Toggle background NONE and back again
+-- vim.keymap.set('n', '<leader>bt', '<CMD>hi Normal guibg=NONE ctermbg=NONE<CR>', { Desc = '[B]ackground [T]ransparent' })
+-- vim.keymap.set('n', '<leader>bb', '<CMD>hi Normal guibg=Black ctermbg=Black<CR>', { desc = '[T]ransparent [B]ackground ' })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -11,7 +15,7 @@ vim.g.have_nerd_font = true
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
-
+--
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
