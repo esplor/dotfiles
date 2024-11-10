@@ -4,6 +4,8 @@ LOCAL_DIR=/usr/local
 
 . ./functions
 
+sudo apt install -y ripgrep luarocks
+
 if [ ! -d $LOCAL_DIR ]; then
     echo "Directory $LOCAL_DIR does not exist, creating.."
     mkdir -p $LOCAL_DIR
