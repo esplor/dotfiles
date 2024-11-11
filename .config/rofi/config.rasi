@@ -1,0 +1,30 @@
+/* vim:ft=css */
+configuration {
+modi: "window,drun,run,ssh";
+width: 900;
+lines: 15;
+columns: 1;
+/*	location: 0;*/
+/*	padding: 5;*/
+/*	yoffset: 0;*/
+/*	xoffset: 0;*/
+/*	fixed-num-lines: true;*/
+show-icons: true;
+terminal: "kitty";
+/*	ssh-client: "ssh";*/
+/*	ssh-command: "{terminal} -e {ssh-client} {host}";*/
+/*	run-command: "{cmd}";*/
+/*	run-list-command: "";*/
+/*	run-shell-command: "{terminal} -e {cmd}";*/
+/*	window-command: "xkill -id {window}";*/
+/*	window-match-fields: "all";*/
+/*	drun-icon-theme: ;*/
+drun-match-fields: "name,generic,exec,categories";
+/*	disable-history: false;*/
+/*	sort: false;*/
+levenshtein-sort: true;
+/*	case-sensitive: false;*/
+/*	cycle: true;*/
+sidebar-mode: true;
+}
+@theme "gruvbox-dark-soft"
