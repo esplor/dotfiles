@@ -137,6 +137,9 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
+                widget.Notify(
+                    width=400, scroll=True, scroll_step=5, default_timeout_low=3
+                ),
                 widget.PulseVolume(emoji=True),
                 widget.Chord(
                     chords_colors={
@@ -149,7 +152,6 @@ screens = [
                 # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="W:%U %a %d.%m.%Y %H:%M"),
-                widget.Notify(),
             ],
             24,
             border_width=[1, 0, 1, 0],  # Draw top and bottom borders
