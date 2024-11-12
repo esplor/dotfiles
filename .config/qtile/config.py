@@ -10,6 +10,7 @@ ctrl = "control"
 browser = "google-chrome"
 terminal = "kitty"
 launcher = "rofi -show drun"
+locker = "slock"
 
 keys = [
     Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
@@ -17,6 +18,7 @@ keys = [
     Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.spawn(launcher), desc="Spawn launcher"),
+    Key([mod], "l", lazy.spawn(locker), desc="Lock screen"),
     Key(
         [mod, "shift"],
         "Left",
