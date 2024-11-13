@@ -36,18 +36,18 @@ keys = [
     Key(
         [mod, "control"],
         "Left",
-        lazy.layout.grow_left(),
+        lazy.layout.shrink(),
         desc="Grow window to the left",
     ),
     Key(
         [mod, "control"],
         "Right",
-        lazy.layout.grow_right(),
+        lazy.layout.grow(),
         desc="Grow window to the right",
     ),
     Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod, ctrl], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key(
         [mod, "shift"],
         "Return",
@@ -90,7 +90,7 @@ for i in groups:
             Key(
                 [mod, "shift"],
                 i.name,
-                lazy.window.togroup(i.name, switch_group=True),
+                lazy.window.togroup(i.name, switch_group=False),
                 desc=f"Switch to & move focused window to group {i.name}",
             ),
             # Or, use below if you prefer not to switch to that group.
@@ -126,7 +126,7 @@ layouts = [
 
 widget_defaults = dict(
     font="FiraCode Nerd Font",
-    fontsize=14,
+    fontsize=16,
     padding=2,
 )
 extension_defaults = widget_defaults.copy()
@@ -153,9 +153,9 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="W:%U %a %d.%m.%Y %H:%M"),
+                widget.Clock(format=" W:%U %a %d.%m.%Y %H:%M "),
             ],
-            24,
+            32,
             border_width=[1, 0, 1, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
