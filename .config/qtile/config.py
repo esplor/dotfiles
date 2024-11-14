@@ -6,6 +6,7 @@ from libqtile.lazy import lazy
 from qtile_extras import widget
 
 mod = "mod1"
+super = "mod4"
 ctrl = "control"
 browser = "google-chrome"
 terminal = "kitty"
@@ -18,7 +19,7 @@ keys = [
     Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.spawn(launcher), desc="Spawn launcher"),
-    Key([mod], "l", lazy.spawn(locker), desc="Lock screen"),
+    Key([super], "l", lazy.spawn(locker), desc="Lock screen"),
     Key(
         [mod, "shift"],
         "Left",
@@ -151,34 +152,37 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Wallpaper(
-                    directory="~/Wallpapers/",
-                    label="W",
-                    wallpaper_command=None,
-                ),
-                widget.CurrentLayout(),
-                widget.Sep(),
+                widget.CurrentLayoutIcon(scale=0.6),
+                # widget.CurrentLayout(),
+                widget.Sep(padding=10),
                 widget.GroupBox(),
                 widget.Sep(),
                 widget.Prompt(),
-                widget.WindowName(),
+                widget.WindowName(fmt="<i>{}</i>"),
                 widget.Notify(
                     width=400, scroll=True, scroll_step=5, default_timeout_low=3
                 ),
-                widget.MemoryGraph(frequency=5, border_width=0),
+                # widget.MemoryGraph(frequency=5, border_width=0),
                 widget.PulseVolume(emoji=True, limit_max_volume=True),
                 widget.Systray(),
                 widget.Clock(format=" W:%U %a %d.%m.%Y %H:%M "),
                 widget.Sep(),
+                widget.Wallpaper(
+                    fontsize=18,
+                    directory="~/Wallpapers/",
+                    label="󰸉",
+                    wallpaper_command=None,
+                    padding=10,
+                ),
                 widget.TextBox(
                     "󰔍",
-                    fontsize=24,
+                    fontsize=18,
                     mouse_callbacks={"Button1": lazy.spawn("xset s off -dpms")},
                     padding=10,
                 ),
                 widget.TextBox(
                     "",
-                    fontsize=24,
+                    fontsize=18,
                     mouse_callbacks={"Button1": lazy.spawn("slock")},
                     padding=10,
                 ),
