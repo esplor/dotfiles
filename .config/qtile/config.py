@@ -1,6 +1,6 @@
 import subprocess
 
-from libqtile import bar, layout, hook  # , qtile
+from libqtile import bar, layout, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from qtile_extras import widget
@@ -100,12 +100,21 @@ for i in groups:
         ]
     )
 
+colors = dict(
+    active="#a9b1d6",
+    inactive="#565f89",
+    highlight="#bb9af7",
+    fg="#414868",
+    bg="#1a1b26",
+)
+
 layout_theme = {
     "border_width": 3,
     "margin": 10,
-    "border_focus": "4e50ad",
-    "border_normal": "343434",
+    "border_focus": colors["active"],
+    "border_normal": colors["inactive"],
     "single_border_width": 1,
+    "ratio": 0.6,
 }
 
 layouts = [
@@ -125,39 +134,66 @@ layouts = [
 ]
 
 widget_defaults = dict(
+    active=colors["active"],
+    inactive=colors["inactive"],
     font="FiraCode Nerd Font",
     fontsize=16,
-    padding=2,
+    foreground=colors["active"],
+    padding=5,
+    size_percent=60,
 )
+
+
 extension_defaults = widget_defaults.copy()
+
 
 screens = [
     Screen(
         top=bar.Bar(
             [
+                widget.Wallpaper(
+                    directory="~/Wallpapers/",
+                    label="W",
+                    wallpaper_command=None,
+                ),
                 widget.CurrentLayout(),
+                widget.Sep(),
                 widget.GroupBox(),
+                widget.Sep(),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(
                     width=400, scroll=True, scroll_step=5, default_timeout_low=3
                 ),
-                widget.PulseVolume(emoji=True),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
+                widget.MemoryGraph(frequency=5, border_width=0),
+                widget.PulseVolume(emoji=True, limit_max_volume=True),
                 widget.Systray(),
                 widget.Clock(format=" W:%U %a %d.%m.%Y %H:%M "),
+                widget.Sep(),
+                widget.TextBox(
+                    "󰔍",
+                    fontsize=24,
+                    mouse_callbacks={"Button1": lazy.spawn("xset s off -dpms")},
+                    padding=10,
+                ),
+                widget.TextBox(
+                    "",
+                    fontsize=24,
+                    mouse_callbacks={"Button1": lazy.spawn("slock")},
+                    padding=10,
+                ),
+                widget.Sep(padding=20),
+                widget.QuickExit(default_text="[󰐥]", countdown_format="[{}]"),
             ],
             32,
-            border_width=[1, 0, 1, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            background=colors["bg"],
+            # border_width=[1, 0, 1, 0],  # Draw top and bottom borders
+            # border_color=[
+            #    "769ff0",
+            #    "000000",
+            #    "769ff0",
+            #    "000000",
+            # ],  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
