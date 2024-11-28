@@ -1,4 +1,7 @@
 /* vim:ft=css */
+/* Dark theme. */
+@import "~/.cache/wal/colors-rofi-dark"
+
 configuration {
 modi: "window,drun,run,ssh";
 width: 900;
@@ -27,4 +30,3 @@ levenshtein-sort: true;
 /*	cycle: true;*/
 sidebar-mode: true;
 }
-@theme "gruvbox-dark-soft"

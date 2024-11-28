@@ -1,6 +1,6 @@
 import subprocess
 
-from libqtile import bar, layout, hook
+from libqtile import bar, hook, layout
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from qtile_extras import widget
@@ -48,7 +48,8 @@ keys = [
     ),
     Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "control"], "n", lazy.layout.normalize(),
+        desc="Reset all window sizes"),
     Key(
         [mod, "shift"],
         "Return",
@@ -58,6 +59,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "Backspace", lazy.window.kill(), desc="Kill focused window"),
+    Key([], "F12", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
         "f",
@@ -101,7 +103,23 @@ for i in groups:
         ]
     )
 
-colors = dict(
+colors = []
+cache = "/home/eslo/.cache/wal/colors"
+
+# TODO: Move this to a function collection
+
+
+def load_colors(cache):
+    with open(cache, "r") as file:
+        for _ in range(16):
+            colors.append(file.readline().strip())
+    colors.append("#ffffff")
+    lazy.reload()
+
+
+load_colors(cache)
+
+manual_colors = dict(
     active="#a9b1d6",
     inactive="#565f89",
     highlight="#bb9af7",
@@ -111,17 +129,18 @@ colors = dict(
 
 layout_theme = {
     "border_width": 3,
-    "margin": 10,
-    "border_focus": colors["active"],
-    "border_normal": colors["inactive"],
-    "single_border_width": 1,
-    "ratio": 0.6,
+    "margin": 8,
+    "border_focus": colors[6],
+    "border_normal": colors[2],
+    "single_border_width": 3,
+    "single_margin": 0,
+    "ratio": 0.55,
 }
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=1),
-    # layout.Max(),
+    # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"],),
+    # layout.Max()
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -135,13 +154,16 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    active=colors["active"],
-    inactive=colors["inactive"],
-    font="FiraCode Nerd Font",
+    active=colors[6],
+    inactive=colors[1],
+    foreground=colors[2],
+    block_highlight_text_color=colors[6],  # Text for active tab
+    this_current_screen_border=colors[2],  # Box around active tab
+    font="JetBrainsMono Nerd Font",
     fontsize=16,
-    foreground=colors["active"],
     padding=5,
     size_percent=60,
+    highlight_method="block",
 )
 
 
@@ -155,34 +177,45 @@ screens = [
                 widget.CurrentLayoutIcon(scale=0.6),
                 # widget.CurrentLayout(),
                 widget.Sep(padding=10),
-                widget.GroupBox(),
+                widget.GroupBox(padding=1),
                 widget.Sep(),
                 widget.Prompt(),
                 widget.WindowName(fmt="<i>{}</i>"),
                 widget.Notify(
-                    width=400, scroll=True, scroll_step=5, default_timeout_low=3
+                    width=500,
+                    scroll=True,
+                    scroll_step=5,
+                    default_timeout_low=5,
                 ),
-                # widget.MemoryGraph(frequency=5, border_width=0),
-                widget.PulseVolume(emoji=True, limit_max_volume=True),
                 widget.Systray(),
-                widget.Clock(format=" W:%U %a %d.%m.%Y %H:%M "),
+                widget.PulseVolume(emoji=True, limit_max_volume=True, step=5),
+                widget.UPowerWidget(
+                    fill_normal=colors[1],
+                    border_charge_colour=colors[1],
+                    percentage_low=0.4,
+                ),
+                widget.Clock(format=" 󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
-                widget.Wallpaper(
-                    fontsize=18,
-                    directory="~/Wallpapers/",
-                    label="󰸉",
-                    wallpaper_command=None,
+                widget.TextBox(
+                    "",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("pavucontrol -t 3")},
                     padding=10,
                 ),
+                # widget.Wallpaper(
+                #     directory="~/Wallpapers/",
+                #     label="󰸉",
+                #     wallpaper_command=None,
+                #     padding=10,
+                # ),
                 widget.TextBox(
                     "󰔍",
-                    fontsize=18,
-                    mouse_callbacks={"Button1": lazy.spawn("xset s off -dpms")},
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("xset s off -dpms")},
                     padding=10,
                 ),
                 widget.TextBox(
                     "",
-                    fontsize=18,
                     mouse_callbacks={"Button1": lazy.spawn("slock")},
                     padding=10,
                 ),
@@ -190,14 +223,15 @@ screens = [
                 widget.QuickExit(default_text="[󰐥]", countdown_format="[{}]"),
             ],
             32,
-            background=colors["bg"],
-            # border_width=[1, 0, 1, 0],  # Draw top and bottom borders
-            # border_color=[
-            #    "769ff0",
-            #    "000000",
-            #    "769ff0",
-            #    "000000",
-            # ],  # Borders are magenta
+            margin=[0, 0, 5, 0],  # Top, left, bottom, right
+            background=colors[0],
+            border_width=[0, 0, 2, 0],  # Draw bottom border
+            border_color=[
+                colors[2],
+                "000000",
+                colors[2],
+                "000000",
+            ],  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -222,7 +256,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
