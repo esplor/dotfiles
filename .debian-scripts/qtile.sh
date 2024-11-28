@@ -2,7 +2,7 @@ sudo apt install python3-venv xinit libglib2.0-bin build-essential libpangocairo
 	libpython3-dev libiw-dev feh picom x11-utils fonts-recommended kitty dex python3-pip python3-dbus-next python3-cffi \
 	python3-cairocffi libxcb-render0-dev libffi-dev python3-cffi psutils
 sudo python3 -m venv /opt/qtile --upgrade-deps
-sudo /opt/qtile/bin/pip install --upgrade qtile[widgets] qtile-extras
+sudo /opt/qtile/bin/pip install --upgrade qtile[widgets] qtile-extras pywal16
 cat <<EOF> $HOME/example.xinitrc
 # Rename file to .xinitrc
 # something cool & # Remember "and" at the end.
