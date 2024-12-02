@@ -106,9 +106,8 @@ for i in groups:
 colors = []
 cache = "/home/eslo/.cache/wal/colors"
 
+
 # TODO: Move this to a function collection
-
-
 def load_colors(cache):
     with open(cache, "r") as file:
         for _ in range(16):
@@ -188,10 +187,12 @@ screens = [
                     default_timeout_low=5,
                 ),
                 widget.Systray(),
-                widget.PulseVolume(emoji=True, limit_max_volume=True, step=5),
+                widget.PulseVolume(
+                    emoji=True, limit_max_volume=True, step=5, device="0"
+                ),
                 widget.UPowerWidget(
-                    fill_normal=colors[1],
-                    border_charge_colour=colors[1],
+                    fill_normal=colors[2],
+                    border_charge_colour=colors[2],
                     percentage_low=0.4,
                 ),
                 widget.Clock(format=" 󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
