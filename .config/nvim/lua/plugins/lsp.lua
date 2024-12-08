@@ -163,9 +163,9 @@ return {
     local servers = {
       -- clangd = {},
       -- gopls = {},
-      pyright = {},
+      -- pyright = {},
       ruff = {},
-      markdownlint = {},
+      -- markdownlint = {},
       black = {},
       pylsp = {},
       -- rust_analyzer = {},
