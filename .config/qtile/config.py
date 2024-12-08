@@ -3,10 +3,12 @@ import subprocess
 from libqtile import bar, hook, layout
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+
 from qtile_extras import widget
 
 mod = "mod1"
 super = "mod4"
+altgr = "mod5"
 ctrl = "control"
 browser = "google-chrome"
 terminal = "kitty"
@@ -48,8 +50,7 @@ keys = [
     ),
     Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod, "control"], "n", lazy.layout.normalize(),
-        desc="Reset all window sizes"),
+    Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key(
         [mod, "shift"],
         "Return",
@@ -60,6 +61,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "Backspace", lazy.window.kill(), desc="Kill focused window"),
     Key([], "F12", lazy.window.kill(), desc="Kill focused window"),
+    Key([altgr], "Backspace", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
         "f",
@@ -76,6 +78,10 @@ keys = [
     Key([mod, "shift"], "Backspace", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "i", lazy.spawn(browser), desc="Spawn browser"),
+    Key(
+        [mod, "shift"], "s", lazy.spawn("pavucontrol -t 3"), desc="Spawn sound control"
+    ),
+    Key([mod, "shift"], "t", lazy.spawn("st"), desc="Spawn suckless terminal"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -199,8 +205,7 @@ screens = [
                 widget.Sep(),
                 widget.TextBox(
                     "",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn("pavucontrol -t 3")},
+                    mouse_callbacks={"Button1": lazy.spawn("pavucontrol -t 3")},
                     padding=10,
                 ),
                 # widget.Wallpaper(
@@ -211,8 +216,7 @@ screens = [
                 # ),
                 widget.TextBox(
                     "󰔍",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn("xset s off -dpms")},
+                    mouse_callbacks={"Button1": lazy.spawn("xset s off -dpms")},
                     padding=10,
                 ),
                 widget.TextBox(
