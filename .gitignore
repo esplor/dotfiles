@@ -14,3 +14,4 @@
 .vim/autoload/plug.vim
 __pycache__
 .config/google-chrome/
+.config/htop/
