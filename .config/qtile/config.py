@@ -274,10 +274,13 @@ floating_layout = layout.Floating(
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="Pavucontrol"),  # PulseAudio
+        Match(wm_class="qemu"),  # Yocto runqemu
+        Match(wm_class="galculator"),  # Yocto runqemu
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
@@ -289,8 +292,8 @@ auto_minimize = True
 
 @hook.subscribe.startup_once
 def autostart():
-    # autostart_paths = ":".join(search_paths)
-    subprocess.run(["/usr/bin/dex", "-a"])
+    subprocess.run(["/home/eslo/.config/qtile/autostart.sh"])
+    load_colors(cache)
 
 
 # When using the Wayland backend, this can be used to configure input devices.
@@ -300,7 +303,7 @@ wl_input_rules = None
 wl_xcursor_theme = None
 wl_xcursor_size = 24
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
+# INFO: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting
 # this string if your java app doesn't work correctly. We may as well just lie
