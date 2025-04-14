@@ -6,7 +6,7 @@ from libqtile.lazy import lazy
 
 from qtile_extras import widget
 
-mod = "mod1"
+alt = "mod1"
 super = "mod4"
 altgr = "mod5"
 ctrl = "control"
@@ -16,72 +16,77 @@ launcher = "rofi -show drun"
 locker = "slock"
 
 keys = [
-    Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.spawn(launcher), desc="Spawn launcher"),
+    Key([super], "Left", lazy.layout.left(), desc="Move focus to left"),
+    Key([super], "Right", lazy.layout.right(), desc="Move focus to right"),
+    Key([super], "Down", lazy.layout.down(), desc="Move focus down"),
+    Key([super], "Up", lazy.layout.up(), desc="Move focus up"),
+    Key([super], "space", lazy.spawn(launcher), desc="Spawn launcher"),
     Key([super], "l", lazy.spawn(locker), desc="Lock screen"),
     Key(
-        [mod, "shift"],
+        [super, "shift"],
         "Left",
         lazy.layout.shuffle_left(),
         desc="Move window to the left",
     ),
     Key(
-        [mod, "shift"],
+        [super, "shift"],
         "Right",
         lazy.layout.shuffle_right(),
         desc="Move window to the right",
     ),
-    Key([mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([super, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([super, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
     Key(
-        [mod, "control"],
+        [super, "control"],
         "Left",
         lazy.layout.shrink(),
         desc="Grow window to the left",
     ),
     Key(
-        [mod, "control"],
+        [super, "control"],
         "Right",
         lazy.layout.grow(),
         desc="Grow window to the right",
     ),
-    Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([super, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([super, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
     Key(
-        [mod, "shift"],
+        [super, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"
+    ),
+    Key(
+        [super, "shift"],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "Backspace", lazy.window.kill(), desc="Kill focused window"),
+    Key([super], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([super], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([super], "Backspace", lazy.window.kill(), desc="Kill focused window"),
     Key([], "F12", lazy.window.kill(), desc="Kill focused window"),
     Key([altgr], "Backspace", lazy.window.kill(), desc="Kill focused window"),
     Key(
-        [mod],
+        [super],
         "f",
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
     Key(
-        [mod],
+        [super],
         "t",
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
-    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "shift"], "Backspace", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod, "shift"], "i", lazy.spawn(browser), desc="Spawn browser"),
+    Key([super, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([super, "shift"], "Backspace", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([super], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([super, "shift"], "i", lazy.spawn(browser), desc="Spawn browser"),
     Key(
-        [mod, "shift"], "s", lazy.spawn("pavucontrol -t 3"), desc="Spawn sound control"
+        [super, "shift"],
+        "s",
+        lazy.spawn("pavucontrol -t 3"),
+        desc="Spawn sound control",
     ),
-    Key([mod, "shift"], "t", lazy.spawn("st"), desc="Spawn suckless terminal"),
+    Key([super, "shift"], "t", lazy.spawn("st"), desc="Spawn suckless terminal"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -90,14 +95,14 @@ for i in groups:
         [
             # mod + group number = switch to group
             Key(
-                [mod],
+                [super],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc=f"Switch to group {i.name}",
             ),
             # mod + shift + group number = switch to & move focused window to group
             Key(
-                [mod, "shift"],
+                [super, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=False),
                 desc=f"Switch to & move focused window to group {i.name}",
@@ -248,15 +253,18 @@ screens = [
 # Drag floating layouts.
 mouse = [
     Drag(
-        [mod],
+        [super],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+        [super],
+        "Button3",
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size(),
     ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([super], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
