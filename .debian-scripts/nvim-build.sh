@@ -15,6 +15,6 @@ NVIM_BUILD_DIR=/tmp/neovim-git/
 [ -d $NVIM_BUILD_DIR ] && rm -rf $NVIM_BUILD_DIR # If clone dir exist, delete before cloning
 
 sudo apt-get update \
-	&& sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential \
-	&& git clone --depth=1 --branch=stable https://github.com/neovim/neovim /tmp/neovim-git \
-	&& cd /tmp/neovim-git && make CMAKE_BUILD_TYPE=Release && sudo make install
+	&& sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential luarocks \
+	&& git clone --depth=1 --branch=stable https://github.com/neovim/neovim $NVIM_BUILD_DIR \
+	&& cd $NVIM_BUILD_DIR && make CMAKE_BUILD_TYPE=Release && sudo make install
