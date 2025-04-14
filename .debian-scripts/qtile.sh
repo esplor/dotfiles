@@ -3,10 +3,10 @@ sudo apt install python3-venv xinit libglib2.0-bin build-essential libpangocairo
 	python3-cairocffi libxcb-render0-dev libffi-dev python3-cffi psutils
 sudo python3 -m venv /opt/qtile --upgrade-deps
 sudo /opt/qtile/bin/pip install --upgrade qtile[widgets] qtile-extras pywal16
-cat <<EOF> $HOME/example.xinitrc
+#cat <<EOF> $HOME/example.xinitrc
 # Rename file to .xinitrc
 # something cool & # Remember "and" at the end.
 # Have a look at xprofile
 
-exec /opt/qtile/bin/qtile start
-EOF
+#exec /opt/qtile/bin/qtile start
+#EOF
