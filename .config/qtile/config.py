@@ -16,10 +16,12 @@ launcher = "rofi -show drun"
 locker = "slock"
 
 keys = [
+    # Navigate windows
     Key([super], "Left", lazy.layout.left(), desc="Move focus to left"),
     Key([super], "Right", lazy.layout.right(), desc="Move focus to right"),
     Key([super], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([super], "Up", lazy.layout.up(), desc="Move focus up"),
+    # ---
     Key([super], "space", lazy.spawn(launcher), desc="Spawn launcher"),
     Key([super], "l", lazy.spawn(locker), desc="Lock screen"),
     Key(
@@ -209,9 +211,19 @@ screens = [
                 widget.Clock(format=" 󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
                 widget.TextBox(
+                    "󰸉",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn(
+                            "/opt/qtile/bin/wal -b 000000 -a 70 -i ~/Wallpapers/ --recursive",
+                            shell=True,
+                        )
+                    },
+                    padding=6,
+                ),
+                widget.TextBox(
                     "",
                     mouse_callbacks={"Button1": lazy.spawn("pavucontrol -t 3")},
-                    padding=10,
+                    padding=6,
                 ),
                 # widget.Wallpaper(
                 #     directory="~/Wallpapers/",
@@ -222,12 +234,12 @@ screens = [
                 widget.TextBox(
                     "󰔍",
                     mouse_callbacks={"Button1": lazy.spawn("xset s off -dpms")},
-                    padding=10,
+                    padding=6,
                 ),
                 widget.TextBox(
                     "",
                     mouse_callbacks={"Button1": lazy.spawn("slock")},
-                    padding=10,
+                    padding=6,
                 ),
                 widget.Sep(padding=20),
                 widget.QuickExit(default_text="[󰐥]", countdown_format="[{}]"),
