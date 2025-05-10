@@ -80,7 +80,7 @@ keys = [
     ),
     Key(
         [ctrl, "shift"],
-        "Left",
+        "Right",
         lazy.screen.next_group(skip_empty=True),
         desc="Navigate to next workgroup",
     ),
@@ -98,7 +98,7 @@ keys = [
     ),
     Key(
         [ctrl, "shift"],
-        "Right",
+        "Left",
         lazy.screen.prev_group(skip_empty=True),
         desc="Navigate to previous workgroup",
     ),
