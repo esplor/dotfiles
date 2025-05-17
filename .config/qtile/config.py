@@ -13,7 +13,7 @@ ctrl = "control"
 browser = "google-chrome"
 terminal = "kitty"
 launcher = "rofi -show drun"
-locker = "slock"
+screen_lock = "slock"
 
 keys = [
     # Navigate windows
@@ -23,7 +23,7 @@ keys = [
     Key([super], "Up", lazy.layout.up(), desc="Move focus up"),
     # ---
     Key([super], "space", lazy.spawn(launcher), desc="Spawn launcher"),
-    Key([super], "l", lazy.spawn(locker), desc="Lock screen"),
+    Key([super], "l", lazy.spawn(screen_lock), desc="Lock screen"),
     Key(
         [super, "shift"],
         "Left",
@@ -79,25 +79,25 @@ keys = [
         desc="Toggle floating on the focused window",
     ),
     Key(
-        [ctrl, "shift"],
+        [ctrl, alt],
         "Right",
         lazy.screen.next_group(skip_empty=True),
         desc="Navigate to next workgroup",
     ),
     Key(
-        [ctrl, "shift"],
+        [ctrl, alt],
         "Up",
         lazy.screen.next_group(),
         desc="Navigate to next workgroup",
     ),
     Key(
-        [ctrl, "shift"],
+        [ctrl, alt],
         "Down",
         lazy.screen.prev_group(),
         desc="Navigate to previous workgroup",
     ),
     Key(
-        [ctrl, "shift"],
+        [ctrl, alt],
         "Left",
         lazy.screen.prev_group(skip_empty=True),
         desc="Navigate to previous workgroup",
