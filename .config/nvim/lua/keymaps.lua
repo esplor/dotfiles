@@ -32,5 +32,9 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Tab navigation
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<CR>", { desc = "Navigate next tab" })
-vim.keymap.set("n", "<leader>tp", "<cmd>tabprevious<CR>", { desc = "Navigate previous tab" })
+vim.keymap.set("n", "<leader>tn", function()
+  vim.cmd("tabnext")
+end, { desc = "Navigate next tab" })
+vim.keymap.set("n", "<leader>tp", function()
+  vim.cmd("tabprevious")
+end, { desc = "Navigate previous tab" })

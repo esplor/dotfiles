@@ -149,7 +149,7 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
     -- Enable the following language servers
     --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -164,10 +164,10 @@ return {
       -- clangd = {},
       -- gopls = {},
       -- pyright = {},
-      ruff = {},
+      -- ruff = {},
       -- markdownlint = {},
       -- black = {},
-      -- pylsp = {},
+      pylsp = {},
       -- rust_analyzer = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
       --
@@ -215,6 +215,7 @@ return {
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format Lua code
       "markdownlint",
+      "ruff",
     })
 
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
