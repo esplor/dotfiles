@@ -102,18 +102,6 @@ keys = [
         lazy.screen.prev_group(skip_empty=True),
         desc="Navigate to previous workgroup",
     ),
-    Key(
-        [super],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
-    Key(
-        [super],
-        "t",
-        lazy.window.toggle_floating(),
-        desc="Toggle floating on the focused window",
-    ),
     Key([super, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([super, "shift"], "Backspace", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([super], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
