@@ -133,6 +133,18 @@ for i in groups:
                 lazy.window.togroup(i.name, switch_group=False),
                 desc=f"Switch to & move focused window to group {i.name}",
             ),
+            Key(
+                [super, "shift"],  # You can change the modifier keys as needed
+                "p",
+                lazy.spawn(
+                    "xset -dpms s off && \
+                    flatpak run tv.plex.PlexDesktop",
+                    shell=True,
+                ),
+                lazy.group["6"].toscreen(),
+                lazy.window.togroup("6"),
+                desc="Launch plex and move it to group 6",
+            ),
             # Or, use below if you prefer not to switch to that group.
             # # mod + shift + group number = move focused window to group
             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
