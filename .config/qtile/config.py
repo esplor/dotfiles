@@ -1,10 +1,8 @@
 import subprocess
 
-from libqtile import bar, hook, layout
+from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-
-from qtile_extras import widget
 
 alt = "mod1"
 super = "mod4"
@@ -236,14 +234,6 @@ screens = [
                     default_timeout_low=5,
                 ),
                 widget.Systray(),
-                widget.PulseVolume(
-                    emoji=True, limit_max_volume=True, step=5, device="0"
-                ),
-                widget.UPowerWidget(
-                    fill_normal=colors[2],
-                    border_charge_colour=colors[2],
-                    percentage_low=0.4,
-                ),
                 widget.Clock(format=" 󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
                 widget.TextBox(
@@ -278,7 +268,7 @@ screens = [
                     padding=6,
                 ),
                 widget.Sep(padding=20),
-                widget.QuickExit(default_text="[󰐥]", countdown_format="[{}]"),
+                widget.QuickExit(default_text="[󰐥]"),
             ],
             32,
             margin=[0, 0, 5, 0],  # Top, left, bottom, right
