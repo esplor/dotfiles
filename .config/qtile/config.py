@@ -234,7 +234,8 @@ screens = [
                     default_timeout_low=5,
                 ),
                 widget.Systray(),
-                widget.Clock(format=" 󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
+                widget.Battery(format="B:{char}{percent:2.0%}"),
+                widget.Clock(format="󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
                 widget.TextBox(
                     "󰸉",
@@ -321,9 +322,12 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="Pavucontrol"),  # PulseAudio
         Match(wm_class="qemu"),  # Yocto runqemu
-        Match(wm_class="galculator"),  # Yocto runqemu
+        Match(wm_class="galculator"),  # Calculator
+        Match(wm_class="gnome-calculator"),  # Calculator
+        Match(wm_class="VirtualBox Machine"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(func=lambda c: c.is_transient_for()),  # Float if window have parent
     ]
 )
 
