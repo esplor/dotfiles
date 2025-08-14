@@ -220,8 +220,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(scale=0.6),
-                # widget.CurrentLayout(),
+                widget.CurrentLayout(mode="icon", scale=0.6),
                 widget.Sep(padding=10),
                 widget.GroupBox(padding=1),
                 widget.Sep(),
