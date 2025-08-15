@@ -15,3 +15,4 @@
 __pycache__
 .config/google-chrome/
 .config/htop/
+.config/mimeapps.list
