@@ -8,10 +8,16 @@ alt = "mod1"
 super = "mod4"
 altgr = "mod5"
 ctrl = "control"
-browser = "google-chrome"
+
+# --- APPS ---
+# browser = "google-chrome"
+browser = "firefox-esr"
 terminal = "kitty"
 launcher = "rofi -show drun"
 screen_lock = "slock"
+
+brightness_day = "brightnessctl -d amdgpu_bl0 s 80%"
+brightness_night = "brightnessctl -d amdgpu_bl0 s 15%"
 
 keys = [
     # Navigate windows
@@ -237,10 +243,30 @@ screens = [
                 widget.Clock(format="󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
                 widget.TextBox(
+                    "󰃠",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn(
+                            brightness_day,
+                            shell=True,
+                        )
+                    },
+                    padding=6,
+                ),
+                widget.TextBox(
+                    "󰃝",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn(
+                            brightness_night,
+                            shell=True,
+                        )
+                    },
+                    padding=6,
+                ),
+                widget.TextBox(
                     "󰸉",
                     mouse_callbacks={
                         "Button1": lazy.spawn(
-                            "/opt/qtile/bin/wal -b 000000 -a 70 -i ~/Wallpapers/ --recursive",
+                            "/opt/qtile/bin/wal -b 000000 -a 80 -i ~/Wallpapers/ --recursive",
                             shell=True,
                         )
                     },
@@ -319,7 +345,7 @@ floating_layout = layout.Floating(
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(wm_class="Pavucontrol"),  # PulseAudio
+        Match(wm_class="pavucontrol"),  # PulseAudio
         Match(wm_class="qemu"),  # Yocto runqemu
         Match(wm_class="galculator"),  # Calculator
         Match(wm_class="gnome-calculator"),  # Calculator
