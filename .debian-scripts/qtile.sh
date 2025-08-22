@@ -3,7 +3,7 @@ sudo apt install \
 	libiw-dev libglib2.0-bin xinit build-essential picom \
 	x11-utils xdg-desktop-portal-gtk \
 	fonts-recommended kitty psmisc imagemagick \
-	pipewire-pulse pavucontrol upower feh rofi gnome-themes-extra
+	pipewire-pulse pavucontrol upower feh rofi gnome-themes-extra easyeffects
 
 sudo python3 -m venv /opt/qtile --upgrade-deps
 sudo /opt/qtile/bin/pip install --upgrade qtile[widgets] pywal16
