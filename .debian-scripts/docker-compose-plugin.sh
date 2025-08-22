@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Clean this..
 
-DC_PATH="/usr/local/bin"
+. ./functions
+is_user_root
 
+DC_PATH="/usr/libexec/docker/cli-plugins"
 # DC_PATH="$HOME/.docker/cli-plugins"
 
 if [ ! -d $DC_PATH ]; then
