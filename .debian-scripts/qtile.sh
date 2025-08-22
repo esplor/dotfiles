@@ -1,5 +1,5 @@
 sudo apt install \
-	libpython3-dev python3-venv \
+	bibata-cursor-theme libpython3-dev python3-venv \
 	libiw-dev libglib2.0-bin xinit build-essential picom \
 	x11-utils xdg-desktop-portal-gtk \
 	fonts-recommended kitty psmisc imagemagick \
@@ -7,3 +7,4 @@ sudo apt install \
 
 sudo python3 -m venv /opt/qtile --upgrade-deps
 sudo /opt/qtile/bin/pip install --upgrade qtile[widgets] pywal16
+
