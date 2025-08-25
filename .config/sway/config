@@ -8,9 +8,12 @@ include /etc/sway/config.d/*
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
-set $mod Mod1
+# Use Mod1 for Alt, Mod4 for super/logo.
+
+set $mod Mod4
+
 # Home row direction keys, like vim
+
 set $left h
 set $down j
 set $up k
@@ -18,7 +21,7 @@ set $right l
 
 # Your preferred terminal emulator
 
-set $term foot
+set $term kitty
 set $browser firefox-esr
 
 # Your preferred application launcher
@@ -50,8 +53,9 @@ exec_always {
 #output eDP-2 resolution 2560x1600 scale 1
 # --- Lenovo E14
 
-output eDP-1 resolution 1920x1080 scale 1
-output * bg ~/.local/share/backgrounds/minas.jpg fill
+#output eDP-1 resolution 1920x1080 scale 1
+
+output * bg ~/Wallpapers/LOTR/LOTR-ShallNotPass.jpg fill
 
 #
 # Example configuration:
