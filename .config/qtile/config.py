@@ -27,6 +27,7 @@ keys = [
     Key([super], "Up", lazy.layout.up(), desc="Move focus up"),
     # ---
     Key([super], "space", lazy.spawn(launcher), desc="Spawn launcher"),
+    Key([super, "shift"], "space", lazy.layout.flip()),
     Key([super], "l", lazy.spawn(screen_lock), desc="Lock screen"),
     Key(
         [super, "shift"],
