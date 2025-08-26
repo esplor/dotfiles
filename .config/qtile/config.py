@@ -120,7 +120,20 @@ keys = [
     Key([super, "shift"], "t", lazy.spawn("st"), desc="Spawn suckless terminal"),
 ]
 
-groups = [Group(i) for i in "123456789"]
+groups = [
+    Group("1"),
+    Group(
+        "V",
+        label="Vscode",
+        matches=[Match(wm_class="Code")],
+    ),
+    Group(
+        "P",
+        label="Plex",
+        matches=[Match(wm_class="Plex")],
+        layout="max",
+    ),
+]
 for i in groups:
     keys.extend(
         [
@@ -137,18 +150,6 @@ for i in groups:
                 i.name,
                 lazy.window.togroup(i.name, switch_group=False),
                 desc=f"Switch to & move focused window to group {i.name}",
-            ),
-            Key(
-                [super, "shift"],  # You can change the modifier keys as needed
-                "p",
-                lazy.spawn(
-                    "xset -dpms s off && \
-                    flatpak run tv.plex.PlexDesktop",
-                    shell=True,
-                ),
-                lazy.group["6"].toscreen(),
-                lazy.window.togroup("6"),
-                desc="Launch plex and move it to group 6",
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod + shift + group number = move focused window to group
@@ -193,7 +194,7 @@ layout_theme = {
 layouts = [
     layout.MonadTall(**layout_theme),
     # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"],),
-    # layout.Max()
+    layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
