@@ -60,13 +60,7 @@ keys = [
     Key(
         [super, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"
     ),
-    Key(
-        [super, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
-    Key([super], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([super, "shift"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([super], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([super], "Backspace", lazy.window.kill(), desc="Kill focused window"),
     Key([], "F12", lazy.window.kill(), desc="Kill focused window"),
@@ -122,14 +116,13 @@ keys = [
 
 groups = [
     Group("1"),
+    Group("2"),
     Group(
-        "V",
-        label="Vscode",
+        "3",
         matches=[Match(wm_class="Code")],
     ),
     Group(
-        "P",
-        label="Plex",
+        "4",
         matches=[Match(wm_class="Plex")],
         layout="max",
     ),
