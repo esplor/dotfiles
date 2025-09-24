@@ -11,13 +11,14 @@ ctrl = "control"
 
 # --- APPS ---
 # browser = "google-chrome"
-browser = "firefox-esr"
+browser = "google-chrome-stable"
 terminal = "kitty"
 launcher = "rofi -show drun"
 screen_lock = "slock"
 
 brightness_day = "brightnessctl -d amdgpu_bl0 s 80%"
 brightness_night = "brightnessctl -d amdgpu_bl0 s 15%"
+no_screen_dim = "xset s off -dpms"
 
 keys = [
     # Navigate windows
@@ -117,12 +118,16 @@ keys = [
 groups = [
     Group("1"),
     Group("2"),
+    Group("3"),
+    Group("4"),
+    Group("5"),
+    Group("6"),
     Group(
-        "3",
+        "V",
         matches=[Match(wm_class="Code")],
     ),
     Group(
-        "4",
+        "P",
         matches=[Match(wm_class="Plex")],
         layout="max",
     ),
@@ -252,6 +257,16 @@ screens = [
                     mouse_callbacks={
                         "Button1": lazy.spawn(
                             brightness_night,
+                            shell=True,
+                        )
+                    },
+                    padding=6,
+                ),
+                widget.TextBox(
+                    "󱎴",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn(
+                            no_screen_dim,
                             shell=True,
                         )
                     },
