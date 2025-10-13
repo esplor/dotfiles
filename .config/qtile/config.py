@@ -243,20 +243,20 @@ screens = [
                 widget.Clock(format="󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
                 widget.TextBox(
-                    "󰃠",
+                    "󰃝",
                     mouse_callbacks={
                         "Button1": lazy.spawn(
-                            brightness_day,
+                            brightness_night,
                             shell=True,
                         )
                     },
                     padding=6,
                 ),
                 widget.TextBox(
-                    "󰃝",
+                    "󰃠",
                     mouse_callbacks={
                         "Button1": lazy.spawn(
-                            brightness_night,
+                            brightness_day,
                             shell=True,
                         )
                     },
