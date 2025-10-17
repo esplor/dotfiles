@@ -6,3 +6,4 @@ misc
 ^/.*\.org
 ^/README.*
 SWAY-README.md
+prepare-dotfiles.sh
