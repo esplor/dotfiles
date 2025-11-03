@@ -7,3 +7,4 @@ misc
 ^/README.*
 SWAY-README.md
 prepare-dotfiles.sh
+^/Changelog.*
