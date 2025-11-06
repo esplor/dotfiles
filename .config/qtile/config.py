@@ -123,6 +123,10 @@ groups = [
     Group("5"),
     Group("6"),
     Group(
+        "I",
+        matches=[Match(wm_class="google-chrome")],
+    ),
+    Group(
         "V",
         matches=[Match(wm_class="Code")],
     ),
