@@ -1,30 +1,24 @@
-## Prereq
-```bash
-sudo apt-get update && sudo apt-get install stow curl git
-```
+# Dotfiles
 
-## Cloning
+Personal dotfiles managed with GNU Stow for Debian-based systems.
+
+## Structure
+
+- `dot-config/` - Configuration files (.config, bash aliases, git config)
+- `dot-debian/` - Debian installation and setup scripts
+- `dot-local/` - Local user data (flatpak overrides)
+- `dot-vim/` - Vim configuration and plugins
+- `dot-wallpapers/` - Wallpaper collection
+
+## Installation
+
 ```bash
+# Clone repository
 git clone --recurse-submodules https://github.com/esplor/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-stow .
+
+# Run interactive setup script
+./prepare-dotfiles.sh
 ```
 
-### Software
-
-### Oh my zsh
-```bash
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-### Github cli (GH)
-```bash
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/etc/apt/trusted.gpg.d/githubcli-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture)] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update && sudo apt install gh
-```
-
-### NVM installation
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-```
+The setup script will prompt you to select which packages to install and handle the stow process.
