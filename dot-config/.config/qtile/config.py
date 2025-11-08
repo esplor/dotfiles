@@ -11,7 +11,7 @@ ctrl = "control"
 
 # --- APPS ---
 # browser = "google-chrome"
-browser = "google-chrome-stable"
+browser = "google-chrome"
 terminal = "kitty"
 launcher = "rofi -show drun"
 screen_lock = "slock"
@@ -147,12 +147,12 @@ for i in groups:
                 desc=f"Switch to group {i.name}",
             ),
             # mod + shift + group number = switch to & move focused window to group
-            Key(
-                [super, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=False),
-                desc=f"Switch to & move focused window to group {i.name}",
-            ),
+            #            Key(
+            #                [super, "shift"],
+            #                i.name,
+            #                lazy.window.togroup(i.name, switch_group=False),
+            #                desc=f"Switch to & move focused window to group {i.name}",
+            #            ),
             # Or, use below if you prefer not to switch to that group.
             # # mod + shift + group number = move focused window to group
             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
