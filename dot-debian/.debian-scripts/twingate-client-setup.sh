@@ -17,6 +17,6 @@ echo "deb [signed-by=/etc/apt/keyrings/twingate-client-keyring.gpg]\
 
 sudo apt update -yq && sudo apt install twingate -yq
 
-success "Twingate client successfully install, configure with 'sudo twingate setup'"
+success "Twingate client successfully installed, configure with 'sudo twingate setup'"
 
 tip "Configure with 'sudo twingate setup'"
