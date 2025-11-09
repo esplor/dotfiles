@@ -7,6 +7,7 @@ NC='\033[0m'        # No Color
 
 # check for root or sudo privileges, if not exit
 is_root() {
+    alert "Checking root permissions..."
     if [ "$(id -u)" -eq 0 ]; then
         success "You have root or sudo privileges, continuing..."
     else
