@@ -1,6 +1,8 @@
+import os
 import subprocess
+from pathlib import Path
 
-from libqtile import bar, hook, layout, widget
+from libqtile import bar, hook, layout, utils, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
@@ -9,60 +11,124 @@ super = "mod4"
 altgr = "mod5"
 ctrl = "control"
 
+# --- PATHS ---
+HOME = Path.home()
+QTILE_CONFIG_DIR = HOME / ".config" / "qtile"
+QTILE_BIN_DIR = Path("/opt/qtile/bin")
+WAL_BIN = QTILE_BIN_DIR / "wal"
+WAL_CACHE = HOME / ".cache" / "wal"
+WAL_COLORS = WAL_CACHE / "colors"
+
+
 # --- APPS ---
-# browser = "google-chrome"
-browser = "google-chrome"
+BROWSERS = {
+    "chrome": "google-chrome",
+    "firefox": "firefox",
+}
+
+browser = BROWSERS["chrome"]
 terminal = "kitty"
 launcher = "rofi -show drun"
 screen_lock = "slock"
+control_sound = "pavucontrol -t 3"
+
+
+def run_wal_and_reload(qtile):
+    """Run wal and schedule a config reload to apply new colors."""
+    wallpaper_dir = HOME / "Wallpapers"
+    # Run wal in background
+    subprocess.Popen(
+        [
+            str(WAL_BIN),
+            "-i",
+            str(wallpaper_dir),
+            "--recursive",
+            "-a",
+            "80",
+            "-b",
+            "000000",
+        ]
+    )
+
+    # Schedule config reload after wal completes
+    from libqtile.widget import base
+
+    def reload_after_delay():
+        qtile.reload_config()
+
+    # Use qtile's call_later to reload after 1 second
+    qtile.call_later(0.1, reload_after_delay)
+
+
+def run_wal():
+    """Return a lazy command to run wal and reload config (for widget buttons)."""
+    return lazy.function(run_wal_and_reload)
+
+
+def create_button(icon, command, padding=6):
+    """Create a clickable TextBox widget button."""
+    return widget.TextBox(icon, mouse_callbacks={"Button1": command}, padding=padding)
+
 
 brightness_day = "brightnessctl -d amdgpu_bl0 s 80%"
 brightness_night = "brightnessctl -d amdgpu_bl0 s 15%"
 no_screen_dim = "xset s off -dpms"
 
+
+# Helper to create directional keybindings
+def create_direction_keys():
+    directions = {"Left": "left", "Right": "right", "Down": "down", "Up": "up"}
+    direction_keys = []
+
+    # Basic navigation (super + arrow)
+    for arrow, direction in directions.items():
+        direction_keys.append(
+            Key(
+                [super],
+                arrow,
+                getattr(lazy.layout, direction)(),
+                desc=f"Move focus to {direction}",
+            )
+        )
+
+    # Shuffle windows (super + shift + arrow)
+    for arrow, direction in directions.items():
+        direction_keys.append(
+            Key(
+                [super, "shift"],
+                arrow,
+                getattr(lazy.layout, f"shuffle_{direction}")(),
+                desc=f"Move window to the {direction}",
+            )
+        )
+
+    # Grow/shrink (super + control + arrow)
+    grow_commands = {
+        "Left": ("shrink", "Shrink window to the left"),
+        "Right": ("grow", "Grow window to the right"),
+        "Down": ("grow_down", "Grow window down"),
+        "Up": ("grow_up", "Grow window up"),
+    }
+    for arrow, (cmd, desc) in grow_commands.items():
+        direction_keys.append(
+            Key([super, "control"], arrow, getattr(lazy.layout, cmd)(), desc=desc)
+        )
+
+    return direction_keys
+
+
 keys = [
-    # Navigate windows
-    Key([super], "Left", lazy.layout.left(), desc="Move focus to left"),
-    Key([super], "Right", lazy.layout.right(), desc="Move focus to right"),
-    Key([super], "Down", lazy.layout.down(), desc="Move focus down"),
-    Key([super], "Up", lazy.layout.up(), desc="Move focus up"),
+    *create_direction_keys(),
     # ---
     Key([super], "space", lazy.spawn(launcher), desc="Spawn launcher"),
     Key([super, "shift"], "space", lazy.layout.flip()),
     Key([super], "l", lazy.spawn(screen_lock), desc="Lock screen"),
     Key(
-        [super, "shift"],
-        "Left",
-        lazy.layout.shuffle_left(),
-        desc="Move window to the left",
-    ),
-    Key(
-        [super, "shift"],
-        "Right",
-        lazy.layout.shuffle_right(),
-        desc="Move window to the right",
-    ),
-    Key([super, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([super, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key(
-        [super, "control"],
-        "Left",
-        lazy.layout.shrink(),
-        desc="Grow window to the left",
-    ),
-    Key(
-        [super, "control"],
-        "Right",
-        lazy.layout.grow(),
-        desc="Grow window to the right",
-    ),
-    Key([super, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([super, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
-    Key(
         [super, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"
     ),
     Key([super, "shift"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([super], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    # Multiple ways to kill focused window
     Key([super], "Backspace", lazy.window.kill(), desc="Kill focused window"),
     Key([], "F12", lazy.window.kill(), desc="Kill focused window"),
     Key([altgr], "Backspace", lazy.window.kill(), desc="Kill focused window"),
@@ -82,7 +148,7 @@ keys = [
         [ctrl, alt],
         "Right",
         lazy.screen.next_group(skip_empty=True),
-        desc="Navigate to next workgroup",
+        desc="Navigate to next non-empty workgroup",
     ),
     Key(
         [ctrl, alt],
@@ -100,17 +166,16 @@ keys = [
         [ctrl, alt],
         "Left",
         lazy.screen.prev_group(skip_empty=True),
-        desc="Navigate to previous workgroup",
+        desc="Navigate to previous non-empty workgroup",
     ),
-    Key([super, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([super, "shift"], "Backspace", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([super], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([super, "shift"], "i", lazy.spawn(browser), desc="Spawn browser"),
+    Key([super, "shift"], "i", lazy.spawn(browser), desc=f"Spawn {browser}"),
+    Key([super, "shift"], "r", lazy.reload_config(), desc="Reload qtile config"),
+    Key([super, "shift"], "Backspace", lazy.shutdown(), desc="Shutdown qtile"),
     Key(
         [super, "shift"],
         "s",
-        lazy.spawn("pavucontrol -t 3"),
-        desc="Spawn sound control",
+        lazy.spawn(control_sound),
+        desc=f"Spawn {control_sound}",
     ),
     Key([super, "shift"], "t", lazy.spawn("st"), desc="Spawn suckless terminal"),
 ]
@@ -160,34 +225,44 @@ for i in groups:
         ]
     )
 
-colors = []
-cache = "/home/eslo/.cache/wal/colors"
+# Initialize colors with defaults in case wal hasn't run yet
+colors = [
+    "#000000",  # 0 - background
+    "#333333",  # 1 - border normal
+    "#666666",  # 2 - foreground/inactive
+    "#888888",  # 3
+    "#aaaaaa",  # 4
+    "#cccccc",  # 5
+    "#ffffff",  # 6 - border focus/highlight
+    "#eeeeee",  # 7 - active
+    "#ffffff",  # 8 - white
+]
 
 
-# TODO: Move this to a function collection
-def load_colors(cache):
-    with open(cache, "r") as file:
-        for _ in range(16):
-            colors.append(file.readline().strip())
-    colors.append("#ffffff")
-    lazy.reload()
+def load_colors(color_file=None):
+    global colors
+    if color_file is None:
+        color_file = WAL_COLORS
+    try:
+        with open(color_file, "r") as file:
+            colors = []
+            for _ in range(8):
+                colors.append(file.readline().strip())
+            colors.append("#ffffff")
+    except FileNotFoundError:
+        # Keep default colors if wal hasn't generated colors yet
+        pass
 
 
-load_colors(cache)
+# Load colors from wal cache at startup (if available)
+load_colors()
 
-manual_colors = dict(
-    active="#a9b1d6",
-    inactive="#565f89",
-    highlight="#bb9af7",
-    fg="#414868",
-    bg="#1a1b26",
-)
 
 layout_theme = {
     "border_width": 3,
     "margin": 8,
     "border_focus": colors[6],
-    "border_normal": colors[2],
+    "border_normal": colors[1],
     "single_border_width": 3,
     "single_margin": 0,
     "ratio": 0.55,
@@ -210,8 +285,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    active=colors[6],
-    inactive=colors[1],
+    active=colors[7],
+    inactive=colors[2],
     foreground=colors[2],
     block_highlight_text_color=colors[6],  # Text for active tab
     this_current_screen_border=colors[2],  # Box around active tab
@@ -236,77 +311,29 @@ screens = [
                 widget.Sep(),
                 widget.Prompt(),
                 widget.WindowName(fmt="<i>{}</i>"),
-                widget.Notify(
-                    width=500,
-                    scroll=True,
-                    scroll_step=5,
-                    default_timeout_low=5,
-                ),
+                #                widget.Notify(
+                #                    width=500,
+                #                    scroll=True,
+                #                    scroll_step=5,
+                #                    default_timeout_low=5,
+                #                ),
                 widget.Systray(),
                 widget.Battery(format="B:{char}{percent:2.0%}"),
                 widget.Clock(format="󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
                 widget.Sep(),
-                widget.TextBox(
-                    "󰃝",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn(
-                            brightness_night,
-                            shell=True,
-                        )
-                    },
-                    padding=6,
-                ),
-                widget.TextBox(
-                    "󰃠",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn(
-                            brightness_day,
-                            shell=True,
-                        )
-                    },
-                    padding=6,
-                ),
-                widget.TextBox(
-                    "󱎴",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn(
-                            no_screen_dim,
-                            shell=True,
-                        )
-                    },
-                    padding=6,
-                ),
-                widget.TextBox(
-                    "󰸉",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn(
-                            "/opt/qtile/bin/wal -b 000000 -a 80 -i ~/Wallpapers/ --recursive",
-                            shell=True,
-                        )
-                    },
-                    padding=6,
-                ),
-                widget.TextBox(
-                    "",
-                    mouse_callbacks={"Button1": lazy.spawn("pavucontrol -t 3")},
-                    padding=6,
-                ),
+                create_button("󰃝", lazy.spawn(brightness_night, shell=True)),
+                create_button("󰃠", lazy.spawn(brightness_day, shell=True)),
+                create_button("󱎴", lazy.spawn(no_screen_dim, shell=True)),
+                create_button("󰸉", run_wal()),
+                create_button("", lazy.spawn(control_sound)),
                 # widget.Wallpaper(
                 #     directory="~/Wallpapers/",
                 #     label="󰸉",
                 #     wallpaper_command=None,
                 #     padding=10,
                 # ),
-                widget.TextBox(
-                    "󰔍",
-                    mouse_callbacks={"Button1": lazy.spawn("xset s off -dpms")},
-                    padding=6,
-                ),
-                widget.TextBox(
-                    "",
-                    mouse_callbacks={"Button1": lazy.spawn("slock")},
-                    padding=6,
-                ),
+                create_button("󰔍", lazy.spawn(no_screen_dim)),
+                create_button("", lazy.spawn(screen_lock)),
                 widget.Sep(padding=20),
                 widget.QuickExit(default_text="[󰐥]"),
             ],
@@ -366,7 +393,8 @@ floating_layout = layout.Floating(
         Match(wm_class="VirtualBox Machine"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-        Match(func=lambda c: c.is_transient_for()),  # Float if window have parent
+        # Float if window have parent
+        Match(func=lambda c: c.is_transient_for()),
     ]
 )
 
@@ -381,8 +409,34 @@ auto_minimize = True
 
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.run(["/home/eslo/.config/qtile/autostart.sh"])
-    load_colors(cache)
+    """Run autostart.sh and randomize wallpaper on fresh login."""
+    autostart_script = QTILE_CONFIG_DIR / "autostart.sh"
+    subprocess.run([str(autostart_script)])
+
+    # Randomize wallpaper on fresh login (not on qtile restart/reload)
+    wallpaper_dir = HOME / "Wallpapers"
+    # Run wal synchronously so colors are generated before qtile finishes loading
+    subprocess.run(
+        [
+            str(WAL_BIN),
+            "-i",
+            str(wallpaper_dir),
+            "--recursive",
+            "-a",
+            "80",
+            "-b",
+            "000000",
+        ]
+    )
+
+
+@hook.subscribe.startup_complete
+def reload_after_wal():
+    """Reload config after startup to apply newly generated wal colors."""
+    import libqtile
+
+    qtile = libqtile.qtile
+    qtile.reload_config()
 
 
 # When using the Wayland backend, this can be used to configure input devices.
