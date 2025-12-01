@@ -311,12 +311,12 @@ screens = [
                 widget.Sep(),
                 widget.Prompt(),
                 widget.WindowName(fmt="<i>{}</i>"),
-                #                widget.Notify(
-                #                    width=500,
-                #                    scroll=True,
-                #                    scroll_step=5,
-                #                    default_timeout_low=5,
-                #                ),
+                widget.Notify(
+                    width=500,
+                    scroll=True,
+                    scroll_step=5,
+                    default_timeout_low=5,
+                ),
                 widget.Systray(),
                 widget.Battery(format="B:{char}{percent:2.0%}"),
                 widget.Clock(format="󰨴 %U 󰸘 %d.%m.%Y %H:%M "),
