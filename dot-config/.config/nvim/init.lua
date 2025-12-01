@@ -17,5 +17,5 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true, notify = false },
   vim.keymap.set("n", "<leader>L", "<cmd>Lazy<CR>", { desc = "Lazy" }),
-  vim.keymap.set("n", "<leader>LU", "<cmd>Lazy update<CR>", { desc = "Lazy" }),
+  vim.keymap.set("n", "<leader>LU", "<cmd>Lazy update<CR>", { desc = "Lazy update" }),
 })
