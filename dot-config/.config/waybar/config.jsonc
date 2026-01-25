@@ -6,14 +6,12 @@
     // "width": 1280, // Waybar width
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": [
-    ],
+    "modules-left": [],
     "modules-center": [
         "niri/window",
     ],
     "modules-right": [
         "tray",
-        "idle_inhibitor",
         "pulseaudio",
         "network",
         "power-profiles-daemon",
@@ -44,13 +42,6 @@
     "pulseaudio": {
         "reverse-scrolling": false,
         "on-click": "pavucontrol -t 3",
-    },
-    "idle_inhibitor": {
-        "format": "Idle: {icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
     },
     "tray": {
         // "icon-size": 21,
