@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.3);
     border-bottom: 2px solid @color1;
     transition-property: background-color;
     transition-duration: .5s;
@@ -34,7 +34,7 @@ button:hover {
 
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 4px;
     background-color: transparent;
 }
 
@@ -72,9 +72,14 @@ button:hover {
 #scratchpad,
 #power-profiles-daemon,
 #custom-notification,
+#battery,
+#keyboard-state,
+#window {
+    padding: 0 4px;
+}
 
 #workspaces {
-    margin: 0 10px;
+    margin: 0 4px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -89,7 +94,8 @@ button:hover {
 
 
 
-#battery.charging #battery.plugged {
+#battery.charging,
+#battery.plugged {
     color: #119921;
 }
 
@@ -110,7 +116,15 @@ button:hover {
 }
 
 #power-profiles-daemon {
-    padding-right: 15px;
+    padding: 0 8px;
+}
+
+#network {
+    padding-right: 8px;
+}
+
+#battery {
+    padding-right: 8px;
 }
 
 #power-profiles-daemon.performance {
@@ -211,19 +225,13 @@ label:focus {
 
 #language {
     background: #00b093;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    padding: 0 0px;
-    margin: 0 5px;
+    padding: 0 4px;
     min-width: 16px;
 }
 
 #keyboard-state > label {
-    padding: 0 5px;
+    padding: 0 4px;
+    min-width: 14px;
 }
 
 #keyboard-state > label.locked {
@@ -243,7 +251,7 @@ label:focus {
 }
 
 #privacy-item {
-    padding: 0 5px;
+    padding: 0 4px;
 }
 
 #privacy-item.screenshare {
