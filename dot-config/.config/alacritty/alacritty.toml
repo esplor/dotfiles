@@ -5,4 +5,7 @@ bold = { family = "FiraCode Nerd Font", style = "Bold" }
 
 [window]
 padding = { x = 4, y = 12 }
-opacity = 0.75
+opacity = 0.8
+
+[colors.primary]
+background = "#000000"
