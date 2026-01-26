@@ -1,0 +1,8 @@
+[font]
+size = 12
+normal = { family = "FiraCode Nerd Font" }
+bold = { family = "FiraCode Nerd Font", style = "Bold" }
+
+[window]
+padding = { x = 4, y = 12 }
+opacity = 0.75
