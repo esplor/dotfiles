@@ -9,3 +9,8 @@ opacity = 0.8
 
 [colors.primary]
 background = "#000000"
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+]
