@@ -4,8 +4,8 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Source utility functions if available
-if [ -f "$SCRIPT_DIR/dot-debian/.debian-scripts/utils/functions.sh" ]; then
-    . "$SCRIPT_DIR/dot-debian/.debian-scripts/utils/functions.sh"
+if [ -f "$SCRIPT_DIR/scripts/.debian-scripts/utils/functions.sh" ]; then
+    . "$SCRIPT_DIR/scripts/.debian-scripts/utils/functions.sh"
 else
     # Fallback if functions.sh is not available
     alert() { printf "=== %s ===\n" "$1" >&2; }
@@ -39,17 +39,20 @@ fi
 # Function to get package description
 get_description() {
     case "$1" in
-        "dot-config") echo "Configuration files (.config, bash aliases, git config)" ;;
-        "dot-debian") echo "Debian installation and setup scripts" ;;
-        "dot-local") echo "Local user data (flatpak overrides)" ;;
-        "dot-vim") echo "Vim configuration files and plugins" ;;
-        "dot-wallpapers") echo "Wallpaper collection" ;;
+        "shell") echo "Shell config (.bash_aliases, .bash_functions, .gitconfig, starship)" ;;
+        "editors") echo "Editor config (vim, neovim)" ;;
+        "terminal") echo "Terminal emulators (kitty, foot, alacritty, tmux)" ;;
+        "wm") echo "Window managers (sway, hypr, niri, qtile, waybar, rofi)" ;;
+        "apps") echo "Application config (bat, gh, gtk, easyeffects, autostart)" ;;
+        "scripts") echo "Debian installation and setup scripts" ;;
+        "wallpapers") echo "Wallpaper collection" ;;
+        "local") echo "Local user data (flatpak overrides)" ;;
         *) echo "Unknown package" ;;
     esac
 }
 
 # Define package order
-PACKAGES="dot-config dot-debian dot-local dot-vim dot-wallpapers"
+PACKAGES="shell editors terminal wm apps scripts wallpapers local"
 
 echo ""
 echo "=== Dotfiles Stow Menu ==="
@@ -88,7 +91,7 @@ else
         sel=$(echo "$sel" | xargs)
 
         # Validate selection
-        if [ "$sel" -ge 1 ] 2>/dev/null && [ "$sel" -le 5 ] 2>/dev/null; then
+        if [ "$sel" -ge 1 ] 2>/dev/null && [ "$sel" -le 8 ] 2>/dev/null; then
             # Convert number to package name
             count=1
             for pkg in $PACKAGES; do

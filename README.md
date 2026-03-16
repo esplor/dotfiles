@@ -4,11 +4,14 @@ Personal dotfiles managed with GNU Stow for Debian-based systems.
 
 ## Structure
 
-- `dot-config/` - Configuration files (.config, bash aliases, git config)
-- `dot-debian/` - Debian installation and setup scripts
-- `dot-local/` - Local user data (flatpak overrides)
-- `dot-vim/` - Vim configuration and plugins
-- `dot-wallpapers/` - Wallpaper collection
+- `shell/` - Shell config (.bash_aliases, .bash_functions, .gitconfig, starship)
+- `editors/` - Editor config (vim, neovim)
+- `terminal/` - Terminal emulators (kitty, foot, alacritty, tmux)
+- `wm/` - Window managers (sway, hypr, niri, qtile, waybar, rofi)
+- `apps/` - Application config (bat, gh, gtk, easyeffects, autostart)
+- `scripts/` - Debian installation and setup scripts
+- `wallpapers/` - Wallpaper collection
+- `local/` - Local user data (flatpak overrides)
 
 ## Installation
 
