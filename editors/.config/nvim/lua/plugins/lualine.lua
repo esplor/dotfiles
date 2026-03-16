@@ -2,12 +2,13 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
+    local in_tty = vim.env.TERM == "linux"
     require("lualine").setup({
       options = {
-        icons_enabled = true,
+        icons_enabled = not in_tty,
         theme = "auto",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = in_tty and { left = "|", right = "|" } or { left = "", right = "" },
+        section_separators = in_tty and { left = "|", right = "|" } or { left = "", right = "" },
         disabled_filetypes = {
           statusline = {},
           winbar = {},

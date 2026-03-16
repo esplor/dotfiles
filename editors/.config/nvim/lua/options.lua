@@ -61,11 +61,17 @@ vim.opt.splitbelow = true
 
 -- Make certain invisible characters visible:
 vim.opt.list = true
-vim.opt.listchars = {
-  tab = "> ",   -- tabs show as ">  " (helps spot accidental tabs)
-  trail = "·",  -- trailing spaces show as dots
-  nbsp = "_",   -- non-breaking spaces show as underscores
-}
+local in_tty = vim.env.TERM == "linux"
+if in_tty then
+  -- TTY can't render unicode; use ASCII-only characters
+  vim.opt.listchars = { tab = "> ", trail = "-", nbsp = "_" }
+else
+  vim.opt.listchars = {
+    tab = "> ",   -- tabs show as ">  " (helps spot accidental tabs)
+    trail = "·",  -- trailing spaces show as dots
+    nbsp = "_",   -- non-breaking spaces show as underscores
+  }
+end
 
 -- Show a live preview of :s/foo/bar replacements as you type
 vim.opt.inccommand = "split"
@@ -82,7 +88,8 @@ vim.opt.sidescrolloff = 10
 -- Disable line wrapping — long lines extend off-screen instead of wrapping
 vim.opt.wrap = false
 -- Enable 24-bit RGB colors (required for most colorschemes to look correct)
-vim.opt.termguicolors = true
+-- Disabled in TTY (linux console) which only supports 8/16 colors
+vim.opt.termguicolors = not in_tty
 
 -- Indentation
 vim.opt.autoindent = true  -- copy indent from current line when starting a new line
