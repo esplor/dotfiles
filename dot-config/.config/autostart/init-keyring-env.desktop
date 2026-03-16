@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Initialize Gnome Keyring Environment
+Exec=/bin/bash -c 'eval $(gnome-keyring-daemon --start); systemctl --user import-environment SSH_AUTH_SOCK GPG_AGENT_INFO GNOME_KEYRING_CONTROL; dbus-update-activation-environment --systemd SSH_AUTH_SOCK GPG_AGENT_INFO GNOME_KEYRING_CONTROL'
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

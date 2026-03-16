@@ -63,6 +63,7 @@
 - [ ] Add support for non-Debian distributions (Ubuntu, Mint, etc.)
 
 ### Changelog
+- 22.02.2026 - Added uv-tools.sh to install pywal16 and tldr via uv tool
 - 06.11.2025 - Refactored all scripts to use SCRIPT_DIR for portable sourcing
 - 06.11.2025 - Added tip() function for user-friendly tips and suggestions
 - 06.11.2025 - Standardized colors to bold bright (more visible)

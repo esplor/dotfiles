@@ -13,7 +13,7 @@ NERD_DIR=/usr/local/share/fonts/nerd-fonts
 [ -d "$NERD_DIR" ] || sudo mkdir -p "$NERD_DIR"
 
 # https://github.com/ryanoasis/nerd-fonts
-fonts="CascadiaCode FiraCode"
+fonts="CascadiaCode FiraCode UbuntuMono"
 
 for font in $fonts
 do
