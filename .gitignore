@@ -1,20 +1,23 @@
-.config/nvim/.netrwhist
-.config/nvim/lazy-lock.json
-.config/nvim/lazy-lock.json
-.config/pulse
-.config/gh/hosts.yml
-.config/pavucontrol.ini
-.config/dconf/
-.config/Thunar/
-.config/xfce4/
-.config/user-dirs.dirs
-.config/user-dirs.locale
-.vim/plugged/
-.vim/.netrwhist
-.vim/autoload/plug.vim
+# Patterns are prefixed with **/ so they match under the GNU Stow package
+# layout (e.g. apps/.config/..., editors/.config/..., wm/.config/...) as well
+# as a plain root-relative path. A bare ".config/..." is anchored to the repo
+# root and would NOT match the stowed "<package>/.config/..." paths.
+**/.config/nvim/.netrwhist
+**/.config/nvim/lazy-lock.json
+**/.config/pulse
+**/.config/gh/hosts.yml
+**/.config/pavucontrol.ini
+**/.config/dconf/
+**/.config/Thunar/
+**/.config/xfce4/
+**/.config/user-dirs.dirs
+**/.config/user-dirs.locale
+**/.vim/plugged/
+**/.vim/.netrwhist
+**/.vim/autoload/plug.vim
 __pycache__
-.config/google-chrome/
-.config/htop/
-.config/mimeapps.list
-.config/Code/
-.config/menus/
+**/.config/google-chrome/
+**/.config/htop/
+**/.config/mimeapps.list
+**/.config/Code/
+**/.config/menus/
