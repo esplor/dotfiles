@@ -21,3 +21,6 @@ __pycache__
 **/.config/mimeapps.list
 **/.config/Code/
 **/.config/menus/
+# Flatpak per-user OSTree store and runtime state (only overrides/ is tracked)
+**/.local/share/flatpak/repo/
+**/.local/share/flatpak/.changed
