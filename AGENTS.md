@@ -44,3 +44,12 @@ stow --restow shell
 ### Repository Structure
 - Config files go in the appropriate package directory (e.g. `apps/`, `wm/`, `terminal/`)
 - Debian scripts go in `scripts/`
+
+### Boundaries
+
+- **Ask first**
+  - Large cross-package refactors.
+  - Destructive data or migration changes.
+- **Never**
+  - Commit secrets, credentials, or tokens.
+  - Use destructive git operations unless explicitly requested.
