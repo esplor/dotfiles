@@ -7,6 +7,8 @@ return { -- Autoformat
       "<leader>f",
       function()
         require("conform").format({ async = true, lsp_format = "fallback" })
+        -- Strip trailing whitespace on all lines after formatting
+        vim.cmd("silent! %s/\\s\\+$//e")
       end,
       mode = "",
       desc = "[F]ormat buffer",
