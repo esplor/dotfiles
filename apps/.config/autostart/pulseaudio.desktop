@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=PulseAudio
+# Disabled: sound is served by pipewire-pulse; start-pulseaudio-x11 is
+# X11-only and fails. This user entry cancels /etc/xdg/autostart/pulseaudio.desktop.
+Hidden=true

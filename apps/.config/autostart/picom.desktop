@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=picom
+# Disabled: picom is an X11 compositor, irrelevant under niri (Wayland).
+# This user entry cancels /etc/xdg/autostart/picom.desktop.
+Hidden=true
